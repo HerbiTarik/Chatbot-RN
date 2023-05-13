@@ -22,6 +22,8 @@ export default function App() {
         setInputMessage(text)
         console.log(text)
     }
+
+    //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
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <View style={styles.container}>
