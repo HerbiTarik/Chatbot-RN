@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useState } from 'react'
 import {
     StyleSheet,
     Text,
@@ -9,6 +10,18 @@ import {
 } from 'react-native'
 
 export default function App() {
+    const [inputMessage, setInputMessage] = useState('')
+
+    //touchableOpacity
+    const handleButtonClick = () => {
+        console.log('btn clicked')
+    }
+
+    //textInput
+    const handleTextInput = (text) => {
+        setInputMessage(text)
+        console.log(text)
+    }
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <View style={styles.container}>
@@ -17,9 +30,12 @@ export default function App() {
                 </Text>
                 <View style={styles.component}>
                     <View style={styles.inputComponent}>
-                        <TextInput placeholder="Enter your question" />
+                        <TextInput
+                            placeholder="Enter your question"
+                            onChangeText={handleTextInput}
+                        />
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleButtonClick}>
                         <View style={styles.sendComponent}>
                             <Text>Send</Text>
                         </View>
