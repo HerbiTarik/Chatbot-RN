@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useState } from 'react'
+import axios from 'axios'
 import {
     StyleSheet,
     Text,
@@ -11,10 +12,32 @@ import {
 
 export default function App() {
     const [inputMessage, setInputMessage] = useState('')
-
     //touchableOpacity
+    //Pour récupérer seulement l'information on utilise la method:"GET"/ pour faire entrer l'information à partir de notre application on utilise "POST"
+    // "headers" pour spécifier le type du contenu
     const handleButtonClick = () => {
-        console.log('btn clicked')
+        const apiKey = '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'
+        console.log(inputMessage)
+
+        fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:
+                    'Bearer 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',
+            },
+            body: JSON.stringify({
+                prompt: inputMessage,
+                model: 'text-davinci-003',
+            }), //pour convertir l'objet javascript sous forme d'un string
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     //textInput
@@ -23,7 +46,8 @@ export default function App() {
         console.log(text)
     }
 
-    //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
+    //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
+
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <View style={styles.container}>
